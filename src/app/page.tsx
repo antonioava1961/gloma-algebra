@@ -24,6 +24,8 @@ import {
   Target,
   Loader2,
   ChevronRight,
+  Coffee,
+  Heart,
 } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -639,12 +641,35 @@ export default function Home() {
       </main>
 
       {/* ─── Footer ─────────────────────────────────────────────── */}
-      <footer className="mt-auto bg-gray-100 border-t border-gray-200 py-4">
-        <div className="max-w-5xl mx-auto px-4 text-center text-sm text-gray-500">
-          <p>
-            ÁlgebraPro — Practica álgebra con inteligencia artificial •{" "}
-            <span className="text-emerald-600 font-medium">Aprende paso a paso</span>
-          </p>
+      <footer className="mt-auto bg-gray-100 border-t border-gray-200 py-6">
+        <div className="max-w-5xl mx-auto px-4 space-y-5">
+          {/* Coffee donation section */}
+          <div className="flex flex-col items-center gap-3">
+            <div className="flex items-center gap-2 text-gray-600">
+              <Heart className="size-4 text-rose-500 fill-rose-500" />
+              <span className="text-sm font-medium">Si te ha gustado, invita un café</span>
+              <Coffee className="size-4 text-amber-600" />
+            </div>
+            <motion.a
+              href="https://www.paypal.com/paypalme/GerardoVazquezalfaro"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-colors duration-200 cursor-pointer"
+            >
+              <Coffee className="size-5" />
+              Invitar un café
+            </motion.a>
+          </div>
+
+          {/* Credits */}
+          <div className="text-center text-sm text-gray-500">
+            <p>
+              ÁlgebraPro — Practica álgebra con inteligencia artificial •{" "}
+              <span className="text-emerald-600 font-medium">Aprende paso a paso</span>
+            </p>
+          </div>
         </div>
       </footer>
     </div>
