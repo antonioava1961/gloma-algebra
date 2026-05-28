@@ -287,6 +287,24 @@ export default function Home() {
         </div>
       </header>
 
+      {/* ─── SEO / Intro text ────────────────────────────────────── */}
+      <section className="bg-gradient-to-b from-[#0a1628]/5 to-transparent">
+        <div className="max-w-4xl mx-auto px-4 py-6 sm:py-8 text-center">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-3">
+            Practica álgebra con ejercicios interactivos y explicaciones paso a paso
+          </h2>
+          <p className="text-gray-600 text-sm sm:text-base leading-relaxed max-w-3xl mx-auto">
+            Aprende a <strong>resolver ecuaciones</strong>, <strong>factorizar polinomios</strong>, 
+            <strong> simplificar fracciones algebraicas</strong> y dominar las <strong>leyes de los exponentes</strong>. 
+            Nuestra herramienta genera ejercicios de <strong>álgebra con soluciones explicadas</strong> para que practiques 
+            <strong> ecuaciones lineales y cuadráticas</strong>, <strong>sistemas de ecuaciones</strong>, 
+            <strong> desigualdades</strong>, <strong>radicales</strong> y <strong>funciones lineales</strong>. 
+            Ideal para <strong>estudiantes de álgebra</strong> que buscan <strong>practicar matemáticas online</strong>, 
+            <strong>resolver problemas de álgebra paso a paso</strong> y <strong>mejorar sus calificaciones</strong>.
+          </p>
+        </div>
+      </section>
+
       {/* ─── Main content ───────────────────────────────────────── */}
       <main className="flex-1 max-w-5xl w-full mx-auto px-4 py-6 sm:py-8 space-y-6 sm:space-y-8">
         {/* ─── Topic Selection ───────────────────────────────────── */}
