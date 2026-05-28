@@ -72,9 +72,9 @@ interface Difficulty {
 }
 
 const difficulties: Difficulty[] = [
-  { id: "facil", label: "Fácil", emoji: "🟢", colorClass: "text-emerald-700 border-emerald-300", bgSelectedClass: "bg-emerald-100 border-emerald-500 text-emerald-800" },
-  { id: "medio", label: "Medio", emoji: "🟡", colorClass: "text-amber-700 border-amber-300", bgSelectedClass: "bg-amber-100 border-amber-500 text-amber-800" },
-  { id: "dificil", label: "Difícil", emoji: "🔴", colorClass: "text-red-700 border-red-300", bgSelectedClass: "bg-red-100 border-red-500 text-red-800" },
+  { id: "facil", label: "Fácil", emoji: "🟢", colorClass: "text-emerald-400 border-emerald-500/50", bgSelectedClass: "bg-emerald-500/15 border-emerald-500 text-emerald-300" },
+  { id: "medio", label: "Medio", emoji: "🟡", colorClass: "text-amber-400 border-amber-500/50", bgSelectedClass: "bg-amber-500/15 border-amber-500 text-amber-300" },
+  { id: "dificil", label: "Difícil", emoji: "🔴", colorClass: "text-red-400 border-red-500/50", bgSelectedClass: "bg-red-500/15 border-red-500 text-red-300" },
 ];
 
 // ─── Solution step type ───────────────────────────────────────────
@@ -247,7 +247,7 @@ export default function Home() {
   const accuracy = stats.solved > 0 ? Math.round((stats.correct / stats.solved) * 100) : 0;
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen flex flex-col bg-[#0a0a0f] text-gray-200">
       {/* ─── Header ─────────────────────────────────────────────── */}
       <header className="bg-[#0a1628] text-white shadow-lg shadow-blue-900/30 relative overflow-hidden">
         {/* Glow effect */}
@@ -288,29 +288,29 @@ export default function Home() {
       </header>
 
       {/* ─── SEO / Intro text ────────────────────────────────────── */}
-      <section className="bg-gradient-to-b from-[#0a1628]/5 to-transparent">
+      <section className="bg-gradient-to-b from-[#0a0a0f] to-[#0f0f1a]">
         <div className="max-w-4xl mx-auto px-4 py-6 sm:py-8 text-center">
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-3">
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-3">
             Practica álgebra con ejercicios interactivos y explicaciones paso a paso
           </h2>
-          <p className="text-gray-600 text-sm sm:text-base leading-relaxed max-w-3xl mx-auto">
-            Aprende a <strong>resolver ecuaciones</strong>, <strong>factorizar polinomios</strong>, 
-            <strong> simplificar fracciones algebraicas</strong> y dominar las <strong>leyes de los exponentes</strong>. 
-            Nuestra herramienta genera ejercicios de <strong>álgebra con soluciones explicadas</strong> para que practiques 
-            <strong> ecuaciones lineales y cuadráticas</strong>, <strong>sistemas de ecuaciones</strong>, 
-            <strong> desigualdades</strong>, <strong>radicales</strong> y <strong>funciones lineales</strong>. 
-            Ideal para <strong>estudiantes de álgebra</strong> que buscan <strong>practicar matemáticas online</strong>, 
-            <strong>resolver problemas de álgebra paso a paso</strong> y <strong>mejorar sus calificaciones</strong>.
+          <p className="text-gray-400 text-sm sm:text-base leading-relaxed max-w-3xl mx-auto">
+            Aprende a <strong className="text-blue-400">resolver ecuaciones</strong>, <strong className="text-blue-400">factorizar polinomios</strong>, 
+            <strong className="text-blue-400"> simplificar fracciones algebraicas</strong> y dominar las <strong className="text-blue-400">leyes de los exponentes</strong>. 
+            Nuestra herramienta genera ejercicios de <strong className="text-purple-400">álgebra con soluciones explicadas</strong> para que practiques 
+            <strong className="text-blue-400"> ecuaciones lineales y cuadráticas</strong>, <strong className="text-blue-400">sistemas de ecuaciones</strong>, 
+            <strong className="text-blue-400"> desigualdades</strong>, <strong className="text-blue-400">radicales</strong> y <strong className="text-blue-400">funciones lineales</strong>. 
+            Ideal para <strong className="text-purple-400">estudiantes de álgebra</strong> que buscan <strong className="text-purple-400">practicar matemáticas online</strong>, 
+            <strong className="text-purple-400">resolver problemas de álgebra paso a paso</strong> y <strong className="text-purple-400">mejorar sus calificaciones</strong>.
           </p>
         </div>
       </section>
 
       {/* ─── Main content ───────────────────────────────────────── */}
-      <main className="flex-1 max-w-5xl w-full mx-auto px-4 py-6 sm:py-8 space-y-6 sm:space-y-8">
+      <main className="flex-1 max-w-5xl w-full mx-auto px-4 py-6 sm:py-8 space-y-6 sm:space-y-8 bg-[#0f0f1a]">
         {/* ─── Topic Selection ───────────────────────────────────── */}
         <section>
-          <h2 className="text-lg font-semibold text-gray-800 mb-3 flex items-center gap-2">
-            <Sparkles className="size-5 text-emerald-600" />
+          <h2 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+            <Sparkles className="size-5 text-blue-400" />
             Elige un tema
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -324,13 +324,13 @@ export default function Home() {
                   onClick={() => handleTopicSelect(topic.id)}
                   className={`flex items-center gap-3 p-4 rounded-xl border-2 transition-all duration-200 text-left cursor-pointer ${
                     isSelected
-                      ? "border-emerald-500 bg-emerald-50 shadow-md"
-                      : "border-gray-200 bg-white hover:border-emerald-300 hover:shadow-sm"
+                      ? "border-blue-500 bg-blue-500/10 shadow-lg shadow-blue-500/20"
+                      : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/8"
                   }`}
                 >
                   <div
                     className={`flex-shrink-0 p-2 rounded-lg ${
-                      isSelected ? "bg-emerald-200 text-emerald-800" : "bg-gray-100 text-gray-600"
+                      isSelected ? "bg-blue-500/30 text-blue-300" : "bg-white/10 text-gray-400"
                     }`}
                   >
                     {topic.icon}
@@ -339,7 +339,7 @@ export default function Home() {
                     <span className="text-lg mr-1">{topic.emoji}</span>
                     <span
                       className={`text-sm font-medium ${
-                        isSelected ? "text-emerald-800" : "text-gray-700"
+                        isSelected ? "text-blue-200" : "text-gray-300"
                       }`}
                     >
                       {topic.name}
@@ -353,8 +353,8 @@ export default function Home() {
 
         {/* ─── Difficulty Selector ───────────────────────────────── */}
         <section>
-          <h2 className="text-lg font-semibold text-gray-800 mb-3 flex items-center gap-2">
-            <Trophy className="size-5 text-emerald-600" />
+          <h2 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+            <Trophy className="size-5 text-blue-400" />
             Dificultad
           </h2>
           <div className="flex flex-wrap gap-3">
@@ -367,7 +367,7 @@ export default function Home() {
                   whileTap={{ scale: 0.96 }}
                   onClick={() => setDifficulty(d.id)}
                   className={`px-5 py-2.5 rounded-lg border-2 font-medium transition-all duration-200 cursor-pointer ${
-                    isSelected ? d.bgSelectedClass : "bg-white border-gray-200 text-gray-600 hover:border-gray-300"
+                    isSelected ? d.bgSelectedClass : "bg-white/5 border-white/10 text-gray-400 hover:border-white/20"
                   }`}
                 >
                   <span className="mr-1.5">{d.emoji}</span>
@@ -388,15 +388,15 @@ export default function Home() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
             >
-              <Card className="rounded-xl shadow-md border-0 overflow-hidden">
-                <CardHeader className="bg-gradient-to-r from-emerald-600 to-emerald-700 text-white">
+              <Card className="rounded-xl shadow-lg shadow-blue-900/20 border border-white/10 bg-[#12121a] overflow-hidden">
+                <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                     <div>
                       <CardTitle className="text-lg flex items-center gap-2">
                         <BookOpen className="size-5" />
                         Ejercicio
                       </CardTitle>
-                      <CardDescription className="text-emerald-200 mt-1">
+                      <CardDescription className="text-blue-200 mt-1">
                         {topics.find((t) => t.id === selectedTopic)?.emoji}{" "}
                         {topics.find((t) => t.id === selectedTopic)?.name} •{" "}
                         {difficulties.find((d) => d.id === difficulty)?.label}
@@ -405,7 +405,7 @@ export default function Home() {
                     <Button
                       onClick={handleGenerateExercise}
                       disabled={isLoadingExercise}
-                      className="bg-white text-emerald-700 hover:bg-emerald-50 font-semibold shadow-sm self-start sm:self-auto"
+                      className="bg-white/10 text-white hover:bg-white/20 font-semibold shadow-sm self-start sm:self-auto border border-white/20"
                     >
                       {isLoadingExercise ? (
                         <Loader2 className="size-4 animate-spin" />
@@ -430,11 +430,11 @@ export default function Home() {
                   {/* No exercise yet */}
                   {!isLoadingExercise && !currentExercise && (
                     <div className="text-center py-10">
-                      <Calculator className="size-12 text-gray-300 mx-auto mb-3" />
-                      <p className="text-gray-500 text-lg">
+                      <Calculator className="size-12 text-gray-500 mx-auto mb-3" />
+                      <p className="text-gray-400 text-lg">
                         Haz clic en &quot;Generar Nuevo Ejercicio&quot; para comenzar
                       </p>
-                      <p className="text-gray-400 text-sm mt-1">
+                      <p className="text-gray-500 text-sm mt-1">
                         Se generará un ejercicio de álgebra adaptado a tu nivel
                       </p>
                     </div>
@@ -450,8 +450,8 @@ export default function Home() {
                       className="space-y-5"
                     >
                       {/* Exercise problem */}
-                      <div className="bg-gray-50 rounded-xl p-6 text-center border border-gray-100">
-                        <p className="text-xl sm:text-2xl font-mono font-semibold text-gray-800 leading-relaxed">
+                      <div className="bg-white/5 rounded-xl p-6 text-center border border-white/10">
+                        <p className="text-xl sm:text-2xl font-mono font-semibold text-blue-200 leading-relaxed">
                           {currentExercise.exercise}
                         </p>
                       </div>
@@ -462,7 +462,7 @@ export default function Home() {
                           variant="ghost"
                           size="sm"
                           onClick={() => setShowHint(!showHint)}
-                          className="text-amber-600 hover:text-amber-700 hover:bg-amber-50"
+                          className="text-amber-400 hover:text-amber-300 hover:bg-amber-500/10"
                         >
                           <Lightbulb className="size-4" />
                           {showHint ? "Ocultar pista" : "Mostrar pista"}
@@ -476,9 +476,9 @@ export default function Home() {
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.2 }}
                           >
-                            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 flex items-start gap-2">
-                              <Lightbulb className="size-4 text-amber-600 mt-0.5 flex-shrink-0" />
-                              <p className="text-sm text-amber-800">{currentExercise.hint}</p>
+                            <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 flex items-start gap-2">
+                              <Lightbulb className="size-4 text-amber-400 mt-0.5 flex-shrink-0" />
+                              <p className="text-sm text-amber-200">{currentExercise.hint}</p>
                             </div>
                           </motion.div>
                         )}
@@ -486,7 +486,7 @@ export default function Home() {
 
                       {/* Answer input */}
                       <div className="space-y-3">
-                        <label className="text-sm font-medium text-gray-700">
+                        <label className="text-sm font-medium text-gray-300">
                           Tu respuesta:
                         </label>
                         <div className="flex gap-2">
@@ -500,13 +500,13 @@ export default function Home() {
                                 handleCheckAnswer();
                               }
                             }}
-                            className="font-mono text-lg flex-1"
+                            className="font-mono text-lg flex-1 bg-white/5 border-white/10 text-white placeholder:text-gray-500"
                             disabled={isCheckingAnswer}
                           />
                           <Button
                             onClick={handleCheckAnswer}
                             disabled={!studentAnswer.trim() || isCheckingAnswer}
-                            className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-5"
+                            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5"
                           >
                             {isCheckingAnswer ? (
                               <Loader2 className="size-4 animate-spin" />
@@ -528,20 +528,20 @@ export default function Home() {
                             transition={{ duration: 0.3 }}
                           >
                             {checkResult.isCorrect ? (
-                              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex items-start gap-3">
-                                <CheckCircle2 className="size-6 text-emerald-600 flex-shrink-0 mt-0.5" />
+                              <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4 flex items-start gap-3">
+                                <CheckCircle2 className="size-6 text-emerald-400 flex-shrink-0 mt-0.5" />
                                 <div>
-                                  <p className="font-semibold text-emerald-800">¡Correcto! 🎉</p>
-                                  <p className="text-sm text-emerald-700 mt-1">{checkResult.feedback}</p>
+                                  <p className="font-semibold text-emerald-300">¡Correcto! 🎉</p>
+                                  <p className="text-sm text-emerald-400 mt-1">{checkResult.feedback}</p>
                                 </div>
                               </div>
                             ) : (
-                              <div className="bg-red-50 border border-red-200 rounded-xl p-4 flex items-start gap-3">
-                                <XCircle className="size-6 text-red-600 flex-shrink-0 mt-0.5" />
+                              <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 flex items-start gap-3">
+                                <XCircle className="size-6 text-red-400 flex-shrink-0 mt-0.5" />
                                 <div>
-                                  <p className="font-semibold text-red-800">Incorrecto</p>
-                                  <p className="text-sm text-red-700 mt-1">{checkResult.feedback}</p>
-                                  <p className="text-sm text-red-600 mt-2 font-medium">
+                                  <p className="font-semibold text-red-300">Incorrecto</p>
+                                  <p className="text-sm text-red-400 mt-1">{checkResult.feedback}</p>
+                                  <p className="text-sm text-red-400 mt-2 font-medium">
                                     Respuesta correcta:{" "}
                                     <span className="font-mono">{checkResult.correctAnswer}</span>
                                   </p>
@@ -557,7 +557,7 @@ export default function Home() {
                         <Button
                           variant="outline"
                           onClick={handleShowSolution}
-                          className="border-emerald-300 text-emerald-700 hover:bg-emerald-50 font-medium"
+                          className="border-blue-500/30 text-blue-400 hover:bg-blue-500/10 font-medium"
                         >
                           <BookOpen className="size-4" />
                           {showSolution ? "Solución" : "Mostrar Solución Completa"}
@@ -591,7 +591,7 @@ export default function Home() {
                                 ))}
                               </div>
                             ) : solution && solution.length > 0 ? (
-                              <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+                              <div className="bg-[#12121a] border border-white/10 rounded-xl overflow-hidden">
                                 <Accordion type="multiple" defaultValue={["step-0"]} className="w-full">
                                   {solution.map((step, index) => (
                                     <AccordionItem
@@ -599,23 +599,23 @@ export default function Home() {
                                       value={`step-${index}`}
                                       className="border-b last:border-b-0"
                                     >
-                                      <AccordionTrigger className="px-4 hover:no-underline hover:bg-gray-50">
+                                      <AccordionTrigger className="px-4 hover:no-underline hover:bg-white/5">
                                         <div className="flex items-center gap-3 text-left">
-                                          <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-200 border-0 font-semibold rounded-full size-7 flex items-center justify-center p-0">
+                                          <Badge className="bg-blue-500/20 text-blue-300 hover:bg-blue-500/30 border-0 font-semibold rounded-full size-7 flex items-center justify-center p-0">
                                             {index + 1}
                                           </Badge>
-                                          <span className="font-medium text-gray-800">
+                                          <span className="font-medium text-gray-200">
                                             {step.title}
                                           </span>
                                         </div>
                                       </AccordionTrigger>
                                       <AccordionContent className="px-4 pb-4">
                                         <div className="ml-10 space-y-3">
-                                          <p className="text-gray-600 text-sm leading-relaxed">
+                                          <p className="text-gray-400 text-sm leading-relaxed">
                                             {step.explanation}
                                           </p>
-                                          <div className="bg-gray-50 rounded-lg p-3 border border-gray-100">
-                                            <p className="font-mono text-emerald-800 font-medium text-sm">
+                                          <div className="bg-white/5 rounded-lg p-3 border border-white/10">
+                                            <p className="font-mono text-blue-300 font-medium text-sm">
                                               {step.calculation}
                                             </p>
                                           </div>
@@ -645,14 +645,14 @@ export default function Home() {
             transition={{ delay: 0.2 }}
             className="text-center py-12"
           >
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 max-w-md mx-auto">
-              <div className="bg-emerald-100 size-16 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <Calculator className="size-8 text-emerald-600" />
+            <div className="bg-[#12121a] rounded-2xl shadow-lg shadow-blue-900/20 border border-white/10 p-8 max-w-md mx-auto">
+              <div className="bg-blue-500/20 size-16 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <Calculator className="size-8 text-blue-400" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">
+              <h3 className="text-xl font-semibold text-white mb-2">
                 ¡Bienvenido a GLOMA ALGEBRA!
               </h3>
-              <p className="text-gray-500">
+              <p className="text-gray-400">
                 Selecciona un tema y dificultad para comenzar a practicar. 
                 Genera ejercicios con IA y recibe explicaciones paso a paso.
               </p>
@@ -662,11 +662,11 @@ export default function Home() {
       </main>
 
       {/* ─── Footer ─────────────────────────────────────────────── */}
-      <footer className="mt-auto bg-gray-100 border-t border-gray-200 py-6">
+      <footer className="mt-auto bg-[#0a0a0f] border-t border-white/10 py-6">
         <div className="max-w-5xl mx-auto px-4 space-y-5">
           {/* Coffee donation section */}
           <div className="flex flex-col items-center gap-3">
-            <div className="flex items-center gap-2 text-gray-600">
+            <div className="flex items-center gap-2 text-gray-400">
               <Heart className="size-4 text-rose-500 fill-rose-500" />
               <span className="text-sm font-medium">Si te ha gustado, invita un café</span>
               <Coffee className="size-4 text-amber-600" />
