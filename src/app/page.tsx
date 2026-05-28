@@ -249,35 +249,38 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       {/* ─── Header ─────────────────────────────────────────────── */}
-      <header className="bg-emerald-700 text-white shadow-md">
-        <div className="max-w-5xl mx-auto px-4 py-5 sm:py-6">
+      <header className="bg-[#0a1628] text-white shadow-lg shadow-blue-900/30 relative overflow-hidden">
+        {/* Glow effect */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-indigo-500/10 to-blue-600/20 blur-xl" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-transparent via-blue-400 to-transparent" />
+        <div className="relative z-10 max-w-5xl mx-auto px-4 py-5 sm:py-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="bg-emerald-600 p-2.5 rounded-xl shadow-inner">
+              <div className="bg-blue-700/50 p-2.5 rounded-xl shadow-inner ring-1 ring-blue-400/30">
                 <Calculator className="size-7" />
               </div>
               <div>
                 <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">ÁlgebraPro</h1>
-                <p className="text-emerald-200 text-sm">Tu compañero de práctica de álgebra</p>
+                <p className="text-blue-300 text-sm">Tu compañero de práctica de álgebra</p>
               </div>
             </div>
 
             {/* Stats bar */}
             <div className="flex gap-3 sm:gap-4">
-              <div className="flex items-center gap-1.5 bg-emerald-800/50 px-3 py-1.5 rounded-lg">
-                <BookOpen className="size-4 text-emerald-300" />
+              <div className="flex items-center gap-1.5 bg-blue-900/50 px-3 py-1.5 rounded-lg ring-1 ring-blue-500/20">
+                <BookOpen className="size-4 text-blue-300" />
                 <span className="text-sm font-medium">{stats.solved}</span>
-                <span className="text-xs text-emerald-300 hidden sm:inline">resueltos</span>
+                <span className="text-xs text-blue-300 hidden sm:inline">resueltos</span>
               </div>
-              <div className="flex items-center gap-1.5 bg-emerald-800/50 px-3 py-1.5 rounded-lg">
-                <Target className="size-4 text-emerald-300" />
+              <div className="flex items-center gap-1.5 bg-blue-900/50 px-3 py-1.5 rounded-lg ring-1 ring-blue-500/20">
+                <Target className="size-4 text-blue-300" />
                 <span className="text-sm font-medium">{accuracy}%</span>
-                <span className="text-xs text-emerald-300 hidden sm:inline">correctas</span>
+                <span className="text-xs text-blue-300 hidden sm:inline">correctas</span>
               </div>
-              <div className="flex items-center gap-1.5 bg-emerald-800/50 px-3 py-1.5 rounded-lg">
+              <div className="flex items-center gap-1.5 bg-blue-900/50 px-3 py-1.5 rounded-lg ring-1 ring-blue-500/20">
                 <Flame className="size-4 text-amber-400" />
                 <span className="text-sm font-medium">{stats.streak}</span>
-                <span className="text-xs text-emerald-300 hidden sm:inline">racha</span>
+                <span className="text-xs text-blue-300 hidden sm:inline">racha</span>
               </div>
             </div>
           </div>
