@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Calculator,
@@ -82,6 +82,138 @@ interface SolutionStep {
   title: string;
   explanation: string;
   calculation: string;
+}
+
+// ─── Particles background component ──────────────────────────────────
+function ParticlesBackground() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let animationId: number;
+    let particles: Array<{
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      size: number;
+      opacity: number;
+      opacityDir: number;
+      color: string;
+    }> = [];
+
+    const colors = ["#3b82f6", "#8b5cf6", "#06b6d4", "#60a5fa", "#a78bfa"];
+
+    function resize() {
+      if (!canvas) return;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function createParticles() {
+      if (!canvas) return;
+      const count = Math.floor((canvas.width * canvas.height) / 15000);
+      particles = [];
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.6,
+          vy: (Math.random() - 0.5) * 0.6,
+          size: Math.random() * 2.5 + 0.5,
+          opacity: Math.random() * 0.4 + 0.1,
+          opacityDir: Math.random() > 0.5 ? 0.003 : -0.003,
+          color: colors[Math.floor(Math.random() * colors.length)],
+        });
+      }
+    }
+
+    function drawParticles() {
+      if (!canvas || !ctx) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw connections
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 150) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(59, 130, 246, ${0.08 * (1 - dist / 150)})`;
+            ctx.lineWidth = 0.5;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw particles
+      for (const p of particles) {
+        // Update position
+        p.x += p.vx;
+        p.y += p.vy;
+
+        // Bounce off edges
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        // Pulsate opacity
+        p.opacity += p.opacityDir;
+        if (p.opacity >= 0.5) p.opacityDir = -0.003;
+        if (p.opacity <= 0.05) p.opacityDir = 0.003;
+
+        // Draw glow
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
+        ctx.fillStyle = p.color.replace(")", `, ${p.opacity * 0.15})`).replace("rgb", "rgba").replace("#3b82f6", "rgba(59,130,246").replace("#8b5cf6", "rgba(139,92,246").replace("#06b6d4", "rgba(6,182,212").replace("#60a5fa", "rgba(96,165,250").replace("#a78bfa", "rgba(167,139,250");
+
+        // Simple glow approach
+        const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 4);
+        gradient.addColorStop(0, p.color + Math.round(p.opacity * 255).toString(16).padStart(2, "0"));
+        gradient.addColorStop(1, p.color + "00");
+        ctx.fillStyle = gradient;
+        ctx.fill();
+
+        // Draw core
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = p.color + Math.round(p.opacity * 255).toString(16).padStart(2, "0");
+        ctx.fill();
+      }
+
+      animationId = requestAnimationFrame(drawParticles);
+    }
+
+    resize();
+    createParticles();
+    drawParticles();
+
+    window.addEventListener("resize", () => {
+      resize();
+      createParticles();
+    });
+
+    return () => {
+      cancelAnimationFrame(animationId);
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 pointer-events-none z-0"
+      style={{ width: "100%", height: "100%" }}
+      aria-hidden="true"
+    />
+  );
 }
 
 // ─── Main component ───────────────────────────────────────────────
@@ -247,9 +379,11 @@ export default function Home() {
   const accuracy = stats.solved > 0 ? Math.round((stats.correct / stats.solved) * 100) : 0;
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0a0a0f] text-gray-200">
+    <div className="min-h-screen flex flex-col bg-[#0a0a0f] text-gray-200 relative">
+      {/* Particles background */}
+      <ParticlesBackground />
       {/* ─── Header ─────────────────────────────────────────────── */}
-      <header className="bg-[#0a1628] text-white shadow-lg shadow-blue-900/30 relative overflow-hidden">
+      <header className="bg-[#0a1628] text-white shadow-lg shadow-blue-900/30 relative overflow-hidden z-10">
         {/* Glow effect */}
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-indigo-500/10 to-blue-600/20 blur-xl" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-transparent via-blue-400 to-transparent" />
@@ -288,7 +422,7 @@ export default function Home() {
       </header>
 
       {/* ─── SEO / Intro text ────────────────────────────────────── */}
-      <section className="bg-gradient-to-b from-[#0a0a0f] to-[#0f0f1a]">
+      <section className="bg-gradient-to-b from-[#0a0a0f] to-[#0f0f1a] relative z-10">
         <div className="max-w-4xl mx-auto px-4 py-6 sm:py-8 text-center">
           <h2 className="text-xl sm:text-2xl font-bold text-white mb-3">
             Practica álgebra con ejercicios interactivos y explicaciones paso a paso
@@ -306,7 +440,7 @@ export default function Home() {
       </section>
 
       {/* ─── Main content ───────────────────────────────────────── */}
-      <main className="flex-1 max-w-5xl w-full mx-auto px-4 py-6 sm:py-8 space-y-6 sm:space-y-8 bg-[#0f0f1a]">
+      <main className="flex-1 max-w-5xl w-full mx-auto px-4 py-6 sm:py-8 space-y-6 sm:space-y-8 relative z-10">
         {/* ─── Topic Selection ───────────────────────────────────── */}
         <section>
           <h2 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
@@ -662,7 +796,7 @@ export default function Home() {
       </main>
 
       {/* ─── Footer ─────────────────────────────────────────────── */}
-      <footer className="mt-auto bg-[#0a0a0f] border-t border-white/10 py-6">
+      <footer className="mt-auto bg-[#0a0a0f] border-t border-white/10 py-6 relative z-10">
         <div className="max-w-5xl mx-auto px-4 space-y-5">
           {/* Coffee donation section */}
           <div className="flex flex-col items-center gap-3">
