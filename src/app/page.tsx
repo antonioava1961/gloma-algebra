@@ -260,7 +260,7 @@ export default function Home() {
                 <Calculator className="size-7" />
               </div>
               <div>
-                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">ÁlgebraPro</h1>
+                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">GLOMA ALGEBRA</h1>
                 <p className="text-blue-300 text-sm">Tu compañero de práctica de álgebra</p>
               </div>
             </div>
@@ -632,7 +632,7 @@ export default function Home() {
                 <Calculator className="size-8 text-emerald-600" />
               </div>
               <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                ¡Bienvenido a ÁlgebraPro!
+                ¡Bienvenido a GLOMA ALGEBRA!
               </h3>
               <p className="text-gray-500">
                 Selecciona un tema y dificultad para comenzar a practicar. 
@@ -668,10 +668,7 @@ export default function Home() {
 
           {/* Credits */}
           <div className="text-center text-sm text-gray-500">
-            <p>
-              ÁlgebraPro — Practica álgebra con inteligencia artificial •{" "}
-              <span className="text-emerald-600 font-medium">Aprende paso a paso</span>
-            </p>
+            <p>COPYRIGHT 2026-MARYWPBLOG</p>
           </div>
         </div>
       </footer>
