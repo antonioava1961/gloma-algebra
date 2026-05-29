@@ -16,11 +16,11 @@ interface ChatCompletionBody {
 
 function getConfig() {
   return {
-    baseUrl: process.env.ZAI_BASE_URL || 'https://internal-api.z.ai/v1',
-    apiKey: process.env.ZAI_API_KEY || 'Z.ai',
-    chatId: process.env.ZAI_CHAT_ID || 'chat-9e97a52a-54ee-4bfe-bcde-8ad717b5da6d',
-    token: process.env.ZAI_TOKEN || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiODVjMTQ4MGQtMzEyZS00YzZlLWEwODAtNzM0MWQzYjY1MmIyIiwiY2hhdF9pZCI6ImNoYXQtOWU5N2E1MmEtNTRlZS00YmZlLWJjZGUtOGFkNzE3YjVkYTZkIiwicGxhdGZvcm0iOiJ6YWkifQ.lWSTSXSAC6MoZY9BjgNSFZqUSt7qIb7dGn4_UGDs44Y',
-    userId: process.env.ZAI_USER_ID || '85c1480d-312e-4c6e-a080-7341d3b652b2',
+    baseUrl: 'https://internal-api.z.ai/v1',
+    apiKey: 'Z.ai',
+    chatId: 'chat-9e97a52a-54ee-4bfe-bcde-8ad717b5da6d',
+    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiODVjMTQ4MGQtMzEyZS00YzZlLWEwODAtNzM0MWQzYjY1MmIyIiwiY2hhdF9pZCI6ImNoYXQtOWU5N2E1MmEtNTRlZS00YmZlLWJjZGUtOGFkNzE3YjVkYTZkIiwicGxhdGZvcm0iOiJ6YWkifQ.lWSTSXSAC6MoZY9BjgNSFZqUSt7qIb7dGn4_UGDs44Y',
+    userId: '85c1480d-312e-4c6e-a080-7341d3b652b2',
   };
 }
 
