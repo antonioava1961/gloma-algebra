@@ -1,41 +1,65 @@
-import ZAI from "z-ai-web-dev-sdk";
-import fs from "fs/promises";
-import path from "path";
-import os from "os";
+// Direct API helper that works in both development and Vercel production
+// Bypasses the SDK's config file system which doesn't work in serverless
 
-// Helper to create ZAI instance that works in both dev and Vercel production
-export async function createZAI() {
-  // In Vercel production, use environment variables
-  if (process.env.ZAI_BASE_URL && process.env.ZAI_API_KEY) {
-    // Create a temporary config file for the SDK
-    const configDir = path.join(os.tmpdir(), "z-ai-config-dir");
-    const configPath = path.join(configDir, ".z-ai-config");
+interface ChatMessage {
+  role: 'system' | 'user' | 'assistant';
+  content: string;
+}
 
-    try {
-      await fs.mkdir(configDir, { recursive: true });
-      await fs.writeFile(
-        configPath,
-        JSON.stringify({
-          baseUrl: process.env.ZAI_BASE_URL,
-          apiKey: process.env.ZAI_API_KEY,
-          chatId: process.env.ZAI_CHAT_ID || "",
-          token: process.env.ZAI_TOKEN || "",
-          userId: process.env.ZAI_USER_ID || "",
-        })
-      );
+interface ChatCompletionBody {
+  model?: string;
+  messages: ChatMessage[];
+  stream?: boolean;
+  thinking?: { type: 'enabled' | 'disabled' };
+  [key: string]: any;
+}
 
-      // Change cwd temporarily so SDK finds the config
-      const originalCwd = process.cwd();
-      process.chdir(configDir);
-      const zai = await ZAI.create();
-      process.chdir(originalCwd);
-      return zai;
-    } catch (err) {
-      console.error("Error creating ZAI config for production:", err);
-      throw err;
-    }
+function getConfig() {
+  return {
+    baseUrl: process.env.ZAI_BASE_URL || 'https://internal-api.z.ai/v1',
+    apiKey: process.env.ZAI_API_KEY || 'Z.ai',
+    chatId: process.env.ZAI_CHAT_ID || 'chat-9e97a52a-54ee-4bfe-bcde-8ad717b5da6d',
+    token: process.env.ZAI_TOKEN || '',
+    userId: process.env.ZAI_USER_ID || '85c1480d-312e-4c6e-a080-7341d3b652b2',
+  };
+}
+
+export async function chatCompletion(body: ChatCompletionBody) {
+  const config = getConfig();
+
+  const url = `${config.baseUrl}/chat/completions`;
+
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${config.apiKey}`,
+    'X-Z-AI-From': 'Z',
+  };
+
+  if (config.chatId) {
+    headers['X-Chat-Id'] = config.chatId;
+  }
+  if (config.userId) {
+    headers['X-User-Id'] = config.userId;
+  }
+  if (config.token) {
+    headers['X-Token'] = config.token;
   }
 
-  // In development, use the default config (from home dir or /etc)
-  return await ZAI.create();
+  const requestBody = {
+    ...body,
+    thinking: body.thinking || { type: 'disabled' },
+  };
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(requestBody),
+  });
+
+  if (!response.ok) {
+    const errorBody = await response.text();
+    throw new Error(`API request failed with status ${response.status}: ${errorBody}`);
+  }
+
+  return await response.json();
 }

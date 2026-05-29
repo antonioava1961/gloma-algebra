@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createZAI } from "@/lib/zai";
+import { chatCompletion } from "@/lib/zai";
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,8 +13,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const zai = await createZAI();
-    const completion = await zai.chat.completions.create({
+    const completion = await chatCompletion({
       messages: [
         {
           role: "system",
@@ -74,7 +73,7 @@ Responde SOLO con el JSON.`,
   } catch (error) {
     console.error("Error solving exercise:", error);
     return NextResponse.json(
-      { error: "Error al generar la solución" },
+      { error: "Error al generar la solución. Por favor intenta de nuevo." },
       { status: 500 }
     );
   }
