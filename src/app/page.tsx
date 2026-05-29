@@ -299,6 +299,7 @@ export default function Home() {
           exercise: currentExercise.exercise,
           studentAnswer: studentAnswer.trim(),
           correctAnswer: currentExercise.answer,
+          topic: topics.find((t) => t.id === selectedTopic)?.name ?? selectedTopic,
         }),
       });
 
